@@ -21,7 +21,7 @@ export default function App() {
     })
   }, []);
 
-  async function handleLikerepositorio(id) {
+  async function handleLikeRepository(id) {
     await api.post(`repositories/${id}/like`);
 
     const newRepositories = repositorie.map( item => {
@@ -42,10 +42,10 @@ export default function App() {
       <SafeAreaView style={styles.container}>
       <FlatList
           data={repositorie}
-          keyExtractor={repositorio => repositorio.id}
+          keyExtractor={repository => repository.id}
           renderItem={( { item } ) =>  (
-            <View style={styles.repositorioContainer}>
-              <Text style={styles.repositorio}>{item.title}</Text>
+            <View style={styles.repositoryContainer}>
+              <Text style={styles.repository}>{item.title}</Text>
 
               <View style={styles.techsContainer}>
                 {item.techs.map(tech => <Text style={styles.tech} key={tech}>{tech}</Text>)}
@@ -54,7 +54,7 @@ export default function App() {
               <View style={styles.likesContainer}>
                 <Text
                   style={styles.likeText}
-                  testID={`repositorio-likes-${item.id}`}
+                  testID={`repository-likes-${item.id}`}
                 >
                   {item.likes} curtidas
                 </Text>
@@ -62,7 +62,7 @@ export default function App() {
 
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => handleLikerepositorio(item.id)}
+                onPress={() => handleLikeRepository(item.id)}
                 testID={`like-button-${item.id}`}
               >
                 <Text style={styles.buttonText}>Curtir</Text>
@@ -80,13 +80,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#7159c1",
   },
-  repositorioContainer: {
+  repositoryContainer: {
     marginBottom: 15,
     marginHorizontal: 15,
     backgroundColor: "#fff",
     padding: 20,
   },
-  repositorio: {
+  repository: {
     fontSize: 32,
     fontWeight: "bold",
   },
